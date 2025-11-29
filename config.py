@@ -283,6 +283,7 @@ class Config:
         """Create all necessary directories if they don't exist."""
         directories = [
             cls.DATA_DIR,
+            cls.DATA_DIR / 'processed',  # Processed features directory
             cls.IMAGE_DIR,
             cls.MODEL_DIR,
             cls.CHECKPOINT_DIR,
@@ -304,3 +305,107 @@ config = Config()
 
 # Create directories on import
 config.create_directories()
+
+
+# ==================== COMPATIBILITY DICTIONARIES ====================
+# These provide dictionary-style access for backward compatibility with scripts
+
+PATHS = {
+    'base_dir': Config.BASE_DIR,
+    'data_dir': Config.DATA_DIR,
+    'raw_dir': Config.DATA_DIR,  # Raw data directory (same as data_dir)
+    'processed_dir': Config.DATA_DIR / 'processed',
+    'images_dir': Config.IMAGE_DIR,
+    'models_dir': Config.MODEL_DIR,
+    'checkpoints_dir': Config.CHECKPOINT_DIR,
+    'predictions_dir': Config.PRED_DIR,
+    'logs_dir': Config.LOG_DIR,
+    'train_csv': Config.TRAIN_CSV,
+    'test_csv': Config.TEST_CSV,
+    'submission_csv': Config.SUBMISSION_CSV,
+}
+
+DATA_CONFIG = {
+    'kaggle_competition': 'amazon-ml-challenge-2025',
+    'val_size': Config.VAL_SIZE,
+    'random_seed': Config.RANDOM_SEED,
+    'image_size': Config.IMAGE_SIZE,
+    'image_mean': Config.IMAGE_MEAN,
+    'image_std': Config.IMAGE_STD,
+    'max_text_length': Config.MAX_TEXT_LENGTH,
+    'download_batch_size': Config.DOWNLOAD_BATCH_SIZE,
+    'download_max_workers': Config.DOWNLOAD_MAX_WORKERS,
+    'download_timeout': Config.DOWNLOAD_TIMEOUT,
+}
+
+FEATURE_CONFIG = {
+    'tfidf_features': Config.TFIDF_MAX_FEATURES,
+    'tfidf_min_df': Config.TFIDF_MIN_DF,
+    'tfidf_max_df': Config.TFIDF_MAX_DF,
+    'ipq_patterns': Config.IPQ_PATTERNS,
+    'unit_conversions': Config.UNIT_CONVERSIONS,
+    'quality_keywords': Config.QUALITY_KEYWORDS,
+    'discount_keywords': Config.DISCOUNT_KEYWORDS,
+}
+
+MODEL_CONFIG = {
+    'text_config': {
+        'model_name': Config.TEXT_MODEL_NAME,
+        'max_length': Config.MAX_TEXT_LENGTH,
+    },
+    'image_config': {
+        'model_name': Config.IMAGE_MODEL_NAME,
+        'image_size': Config.IMAGE_SIZE,
+    },
+    'hidden_dim': Config.HIDDEN_DIM,
+    'tabular_hidden_dim': Config.TABULAR_HIDDEN_DIM,
+    'regressor_hidden_dims': Config.REGRESSOR_HIDDEN_DIMS,
+    'dropout_rate': Config.DROPOUT_RATE,
+    'attention_heads': Config.ATTENTION_HEADS,
+    'lora_r': Config.LORA_R,
+    'lora_alpha': Config.LORA_ALPHA,
+    'lora_dropout': Config.LORA_DROPOUT,
+    'lora_target_modules': Config.LORA_TARGET_MODULES,
+}
+
+TRAIN_CONFIG = {
+    'batch_size': Config.BATCH_SIZE,
+    'nn_epochs': Config.NUM_EPOCHS,
+    'learning_rate': Config.LEARNING_RATE,
+    'weight_decay': Config.WEIGHT_DECAY,
+    'warmup_ratio': Config.WARMUP_RATIO,
+    'gradient_accumulation_steps': Config.GRADIENT_ACCUMULATION_STEPS,
+    'max_grad_norm': Config.MAX_GRAD_NORM,
+    'ema_decay': Config.EMA_DECAY,
+    'use_fp16': Config.USE_FP16,
+    'loss_type': Config.LOSS_TYPE,
+    'huber_delta': Config.HUBER_DELTA,
+    'checkpoint_interval_minutes': Config.CHECKPOINT_INTERVAL_MINUTES,
+    'max_checkpoints_to_keep': Config.MAX_CHECKPOINTS_TO_KEEP,
+    'use_tta': Config.USE_TTA,
+    'n_tta': Config.N_TTA,
+    'random_seed': Config.RANDOM_SEED,
+}
+
+GBDT_CONFIG = {
+    'lightgbm_params': Config.LIGHTGBM_PARAMS,
+    'xgboost_params': Config.XGBOOST_PARAMS,
+    'catboost_params': Config.CATBOOST_PARAMS,
+    'optuna_n_trials': Config.OPTUNA_N_TRIALS,
+    'optuna_timeout': Config.OPTUNA_TIMEOUT,
+    'random_seed': Config.RANDOM_SEED,
+}
+
+ENSEMBLE_CONFIG = {
+    'ridge_alphas': Config.RIDGE_ALPHAS,
+    'elasticnet_alphas': Config.ELASTICNET_ALPHAS,
+    'elasticnet_l1_ratios': Config.ELASTICNET_L1_RATIOS,
+    'meta_lightgbm_params': Config.META_LIGHTGBM_PARAMS,
+    'level2_optimization_method': Config.LEVEL2_OPTIMIZATION_METHOD,
+    'level2_bounds': Config.LEVEL2_BOUNDS,
+}
+
+EVAL_CONFIG = {
+    'smape_epsilon': Config.SMAPE_EPSILON,
+    'n_quantiles': Config.N_QUANTILES,
+}
