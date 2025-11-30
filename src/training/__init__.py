@@ -8,9 +8,8 @@ This module provides training functionality for all model types:
 """
 
 from .train_neural_net import (
-    setup_lora,
+    setup_lora_model,
     train_neural_network,
-    predict,
     predict_with_tta
 )
 
@@ -20,7 +19,7 @@ from .train_gbdt import (
     optimize_xgboost,
     train_xgboost,
     train_catboost,
-    train_gbdt_models
+    train_all_gbdt_models
 )
 
 from .train_ensemble import (
@@ -32,9 +31,8 @@ from .train_ensemble import (
 
 __all__ = [
     # Neural network training
-    'setup_lora',
+    'setup_lora_model',
     'train_neural_network',
-    'predict',
     'predict_with_tta',
     
     # GBDT training
@@ -43,7 +41,7 @@ __all__ = [
     'optimize_xgboost',
     'train_xgboost',
     'train_catboost',
-    'train_gbdt_models',
+    'train_all_gbdt_models',
     
     # Ensemble training
     'StackingEnsemble',
